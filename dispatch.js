@@ -9,5 +9,5 @@ module.exports = function(intentRequest,callback){
         orderCoffee(intentRequest,callback);
     }
 
-    throw new Error(`intent with name ${intentName} not supported`);
+   // throw new Error(`intent with name ${intentName} not supported`);
 }

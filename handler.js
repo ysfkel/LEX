@@ -4,7 +4,7 @@ const dispatch=require('./dispatch');
 module.exports.intents = (event, context, callback) => {
    console.log(`event bot name ${event.bot.name}`)
    try{
-    dispatch(event,(response)=>callback(null,resonse));
+    dispatch(event,(response)=>callback(null,response));
    }catch(err){
      callback(err);
    }
