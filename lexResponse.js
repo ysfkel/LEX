@@ -35,3 +35,16 @@ module.exports.close=(sessionAttributes, fulfillmentState, message) =>{
       }
     }
 }
+
+function getResponseCard(title, imageUrl, buttons) {
+     return {
+         contentType: 'application/vnd.amazonaws.card.generic',
+         genericAttachments: [
+           {
+             title,
+             imageUrl,
+             buttons
+           }
+         ]
+     }
+}

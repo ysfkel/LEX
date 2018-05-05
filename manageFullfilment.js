@@ -10,30 +10,32 @@ const buildFulfilmentResult=(fulfillmentState, messageContent)=>{
     }
 }
 
-const fulfillOrder=(coffeeType, coffeeSize)=>{
-  return databaseManager.saveOrderToDatabase(coffeeType, coffeeSize).then((item)=>{
+const fulfillOrder=(userId,coffeeType, coffeeSize)=>{
+  return databaseManager.saveOrderToDatabase(userId,coffeeType, coffeeSize).then((item)=>{
          return buildFulfilmentResult(
              'Fulfilled',
-             `Tnank , you orderid ${item.orderId} has been placed and `
+             `Thank you! you order has been placed! Order: ${item.orderId} `
          )
   })
 }
 
 
-module.exports = (intentRequest, callback)=>{
+module.exports = (intentRequest)=>{
    const coffeeType = intentRequest.currentIntent.slots.coffee;
    const coffeeSize = intentRequest.currentIntent.slots.size;
-   return fulfillOrder(coffeeType, coffeeSize).then(fulfilledOrder=>{
+   const userId = intentRequest.userId;
+   console.log('----USERID',userId)
+   return fulfillOrder(userId,coffeeType, coffeeSize).then(fulfilledOrder=>{
         console.log('FULFILMENT CODE HOOK');
-        callback(lexResponse.close(intentRequest.sessionAttributes, fulfilledOrder.fulfillmentState,fulfilledOrder.message));
-        return;
+        return Promise.resolve(lexResponse.close(intentRequest.sessionAttributes, fulfilledOrder.fulfillmentState,fulfilledOrder.message));
+       
    })
    // const source = intentRequest.invocationSource;
 
   
     //if(source==='FulfillmentCodeHook'){
          console.log('FULFILMENT CODE HOOK');
-         callback(lexResponse.close(intentRequest.sessionAttributes,
+         return Promise.resolve(lexResponse.close(intentRequest.sessionAttributes,
           'Fulfilled',{ contentType:'PlainText',  content:'Order was placed' }));
     //}
 }

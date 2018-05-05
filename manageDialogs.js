@@ -1,5 +1,5 @@
 const lexResponse = require('./lexResponse')
-module.exports = (intentRequest, callback)=>{
+module.exports = (intentRequest)=>{
 
     const coffeeSize = intentRequest.currentIntent.slots.size;
     const coffeeType = intentRequest.currentIntent.slots.coffee;
@@ -8,13 +8,11 @@ module.exports = (intentRequest, callback)=>{
     console.log('coffee type ', coffeeType+ ' size '+coffeeSize);
     console.log('MY -- SLOTS',intentRequest.currentIntent.slots);
     console.log('MY -- INTENT REQUEST',intentRequest)
-    //const source =  intentRequest.invocationSource;
-    //if(source==='DialogCodeHook'){
             const validationResult = validateCoffeeOrder(coffeeType,coffeeSize);
             if (!validationResult.isValid) {
                 slots[`${validationResult.violatedSlot}`] = null;
             // return Promise.resolve(
-                callback(lexResponse.elicitSlot(
+                return Promise.resolve(lexResponse.elicitSlot(
                     intentRequest.sessionAttributes,
                     intentRequest.currentIntent.name,
                     slots,
@@ -24,8 +22,6 @@ module.exports = (intentRequest, callback)=>{
                     // validationResult.options.imageUrl,
                     // validationResult.options.buttons
                 ));
-
-                return;
             // );
             }
         
@@ -33,8 +29,8 @@ module.exports = (intentRequest, callback)=>{
             if (coffeeSize == null) {
                 intentRequest.currentIntent.slots.size = 'normal';
             }
-            callback(lexResponse.delegate(intentRequest.sessionAttributes, intentRequest.currentIntent.slots));
-            return;
+            return Promise.resolve(lexResponse.delegate(intentRequest.sessionAttributes, intentRequest.currentIntent.slots));
+           
       //  }
 }   
 

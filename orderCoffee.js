@@ -7,12 +7,13 @@ module.exports = (intentRequest, callback)=>{
       //const coffeeSize = intentRequest.currentIntent.slots.size;
 
       const source = intentRequest.invocationSource;
+    
 
       if(source ==='DialogCodeHook'){
-        return handleDialogCodeHook(intentRequest,callback);
+        return handleDialogCodeHook(intentRequest);
       }
       if(source==='FulfillmentCodeHook'){
-         return handleFulfillmentCodeHook(intentRequest,callback);
+         return handleFulfillmentCodeHook(intentRequest);
       }
 }
 

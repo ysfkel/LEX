@@ -1,26 +1,28 @@
 {
-  "name": "LEX",
-  "version": "1.0.0",
-  "description": "",
-  "main": "databaseManager.js",
-  "dependencies": {
-    "aws-sdk": "^2.228.1",
-    "es6-promisify": "^6.0.0",
-    "uuid": "^3.2.1"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ysfkel/LEX.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ysfkel/LEX/issues"
-  },
-  "homepage": "https://github.com/ysfkel/LEX#readme"
+    "name": "LEX",
+    "version": "1.0.0",
+    "description": "",
+    "main": "databaseManager.js",
+    "dependencies": {
+        "aws-sdk": "^2.228.1",
+        "es6-promisify": "^6.0.0",
+        "jest": "^22.4.3",
+        "uuid": "^3.2.1"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "test": "export AWS_REGION=us-east-1 && jest",
+        "watch": "export AWS_REGION=us-east-1 && --watch"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ysfkel/LEX.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/ysfkel/LEX/issues"
+    },
+    "homepage": "https://github.com/ysfkel/LEX#readme"
 }
